@@ -12,6 +12,8 @@ public class GameForm : Form
     private const int offsetX = 50;
     private const int offsetY = 50;
 
+    private Timer gameTimer;
+
     private Shape currentShape;
 
     public GameForm()
@@ -30,8 +32,23 @@ public class GameForm : Form
 
         testButton.Click += TestButton_Click;
         this.Controls.Add(testButton);
+
+        gameTimer = new Timer();
+        gameTimer.Interval = 500;
+        gameTimer.Tick += GameLoop;
+        gameTimer.Start();
+
     }
 
+    private void GameLoop(object sender, EventArgs e)
+    {
+        if (currentShape != null)
+        {
+            currentShape.MoveShape();
+        }
+
+        Invalidate();
+    }
     private void DrawShape(Graphics g, Shape shape)
     {
         using SolidBrush brush = new SolidBrush(shape.ShapeColor);

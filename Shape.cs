@@ -48,18 +48,23 @@ public class Shape
                 ShapeStructure = new List<(int x, int y)>
                 { (0, 1), (1, 1), (1, 0), (2, 0)};
                 break;
-                
+
             case Shapes.T:
                 ShapeStructure = new List<(int x, int y)>
                 { (0, 1), (1, 1), (1, 0), (2, 1)};
                 break;
-            
+
             case Shapes.Z:
                 ShapeStructure = new List<(int x, int y)>
                 { (0, 0), (1, 0), (1, 1), (2, 1)};
                 break;
-            
+
         }
+    }
+
+    public void MoveShape()
+    {
+        Y++;
     }
 
 }
