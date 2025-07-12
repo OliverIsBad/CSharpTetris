@@ -10,7 +10,7 @@ public static class ShapeFactory
                              Color.Purple };
 
         Random rnd = new Random();
-        int shapeNum = rnd.Next(1, 5);
+        int shapeNum = rnd.Next(1, 8);
         Color randomColor = colors[rnd.Next(colors.Length)];
 
         switch (shapeNum)

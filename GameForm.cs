@@ -20,6 +20,16 @@ public class GameForm : Form
         this.Size = new System.Drawing.Size(335, 520);
 
         this.DoubleBuffered = true;
+
+        Button testButton = new Button
+        {
+            Text = "Reset",
+            Size = new Size(80, 30),
+            Location = new Point(100, 10)
+        };
+
+        testButton.Click += TestButton_Click;
+        this.Controls.Add(testButton);
     }
 
     private void DrawShape(Graphics g, Shape shape)
@@ -35,14 +45,26 @@ public class GameForm : Form
             g.DrawRectangle(Pens.Black, drawX, drawY, blockSize, blockSize);
         }
     }
+
+    private void DisposeShape(Graphics g, Shape shape)
+    {
+        using SolidBrush brush = new SolidBrush(this.BackColor);
+
+        foreach (var (x, y) in shape.ShapeStructure)
+        {
+            int drawX = offsetX + (shape.X + x) * blockSize;
+            int drawY = offsetY + (shape.Y + y) * blockSize;
+
+            g.FillRectangle(brush, drawX, drawY, blockSize, blockSize);
+            g.DrawRectangle(Pens.Black, drawX, drawY, blockSize, blockSize);
+        }
+    }
     protected override void OnPaint(PaintEventArgs e)
     {
         base.OnPaint(e);
 
         Graphics g = e.Graphics;
-        Pen gridPen = new Pen(Color.Gray, 1);
-
-
+        using Pen gridPen = new Pen(Color.Gray, 1);
 
         // Vertikale Linien
         for (int x = 0; x <= cols; x++)
@@ -58,30 +80,15 @@ public class GameForm : Form
             g.DrawLine(gridPen, offsetX, yPos, offsetX + cols * blockSize, yPos);
         }
 
-        Button testButton = new Button
+        if (currentShape != null)
         {
-            Text = "Reset",
-            Size = new Size(80, 30),
-            Location = new Point(100, 10)
-        };
-
-        testButton.Click += TestButton_Click;
-
-        this.Controls.Add(testButton);
-   
-        gridPen.Dispose();
+            DrawShape(g, currentShape);
+        }
     }
 
     private void TestButton_Click(object sender, EventArgs e)
     {
-        
-        MessageBox.Show("Button wurde geklickt!");
         currentShape = ShapeFactory.GenerateRandomShape(0, 0);
-        using Graphics g = this.CreateGraphics();
-
-        g.Clear(this.BackColor);
-
-        DrawShape(g, currentShape);
-
+        Invalidate();
     }
 }

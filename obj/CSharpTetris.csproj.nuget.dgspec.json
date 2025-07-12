@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\olive\\Documents\\projects\\CSharpTetris\\CSharpTetris.csproj": {}
+    "D:\\EigeneProjekte\\CSharpTetris\\CSharpTetris.csproj": {}
   },
   "projects": {
-    "C:\\Users\\olive\\Documents\\projects\\CSharpTetris\\CSharpTetris.csproj": {
+    "D:\\EigeneProjekte\\CSharpTetris\\CSharpTetris.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\olive\\Documents\\projects\\CSharpTetris\\CSharpTetris.csproj",
+        "projectUniqueName": "D:\\EigeneProjekte\\CSharpTetris\\CSharpTetris.csproj",
         "projectName": "CSharpTetris",
-        "projectPath": "C:\\Users\\olive\\Documents\\projects\\CSharpTetris\\CSharpTetris.csproj",
+        "projectPath": "D:\\EigeneProjekte\\CSharpTetris\\CSharpTetris.csproj",
         "packagesPath": "C:\\Users\\olive\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\olive\\Documents\\projects\\CSharpTetris\\obj\\",
+        "outputPath": "D:\\EigeneProjekte\\CSharpTetris\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -43,8 +43,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -68,7 +67,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
