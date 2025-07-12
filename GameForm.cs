@@ -103,9 +103,32 @@ public class GameForm : Form
         }
     }
 
-    private void TestButton_Click(object sender, EventArgs e)
+    private void SpawnNewShape()
     {
-        currentShape = ShapeFactory.GenerateRandomShape(0, 0);
+        int startPoint = 0;
+
+        if (currentShape != null && currentShape.ShapeStructure.Count > 3)
+        {
+            if (currentShape.ShapeStructure[3].x == 3)
+            {
+                startPoint = 5;
+            }
+            else
+            {
+                startPoint = 7;
+            }
+        }
+
+        Random rnd = new Random();
+        int x = rnd.Next(0, startPoint); // inkl. startPoint
+
+        currentShape = ShapeFactory.GenerateRandomShape(x, 0);
         Invalidate();
     }
+
+    private void TestButton_Click(object sender, EventArgs e)
+    {
+        SpawnNewShape();
+    }
+
 }
