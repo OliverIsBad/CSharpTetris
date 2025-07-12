@@ -7,6 +7,6 @@ static class Program
     {
         ApplicationConfiguration.Initialize();
         Application.Run(new GameForm());
-        Console.WriteLine("Hello World");
+        Console.WriteLine("This is tetris");
     }    
 }

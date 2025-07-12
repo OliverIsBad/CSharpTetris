@@ -14,13 +14,17 @@ public class Shape
 
     public List<(int x, int y)> ShapeStructure { get; set; }
 
-    public Shape(Color shapeColor, Shapes shapeType, int x, int y)
+    public int Rotation { get; set; }
+
+    public Shape(Color shapeColor, Shapes shapeType, int x, int y, int rotation = 0)
     {
         ShapeColor = shapeColor;
         ShapeType = shapeType;
 
         X = x;
         Y = y;
+
+        Rotation = rotation;
 
         switch (shapeType)
         {
@@ -58,8 +62,32 @@ public class Shape
                 ShapeStructure = new List<(int x, int y)>
                 { (0, 0), (1, 0), (1, 1), (2, 1)};
                 break;
-
         }
+    }
+
+    public void RotateShape()
+    {
+        // New List with rotated Coordinates
+        List<(int x, int y)> rotated = new List<(int x, int y)>();
+
+        foreach (var (x, y) in ShapeStructure)
+        {
+            // 90 degrees turn around (0,0)
+            rotated.Add((y, -x));
+        }
+
+        // Find smallest x and y values after turn
+        int minX = rotated.Min(p => p.x);
+        int minY = rotated.Min(p => p.y);
+
+        // Move all points so that the shape is in the correct position
+        for (int i = 0; i < rotated.Count; i++)
+        {
+            rotated[i] = (rotated[i].x - minX, rotated[i].y - minY);
+        }
+
+        ShapeStructure = rotated;
+        Rotation = (Rotation + 90) % 360;
     }
 
     public void MoveShape()

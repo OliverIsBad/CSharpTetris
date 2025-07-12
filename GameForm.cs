@@ -45,6 +45,7 @@ public class GameForm : Form
         if (currentShape != null)
         {
             currentShape.MoveShape();
+            currentShape.RotateShape();
         }
 
         Invalidate();
@@ -109,18 +110,11 @@ public class GameForm : Form
 
         if (currentShape != null && currentShape.ShapeStructure.Count > 3)
         {
-            if (currentShape.ShapeStructure[3].x == 3)
-            {
-                startPoint = 5;
-            }
-            else
-            {
-                startPoint = 7;
-            }
+            startPoint = (currentShape.ShapeStructure[3].x == 3) ? 5 : 7;
         }
 
         Random rnd = new Random();
-        int x = rnd.Next(0, startPoint); // inkl. startPoint
+        int x = rnd.Next(0, startPoint);
 
         currentShape = ShapeFactory.GenerateRandomShape(x, 0);
         Invalidate();
