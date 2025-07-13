@@ -14,6 +14,7 @@ public class GameForm : Form
 
     private Timer gameTimer;
 
+    private List<Shape> fallenShapes = new List<Shape>();
     private Shape currentShape;
 
     public GameForm()
@@ -46,6 +47,10 @@ public class GameForm : Form
         {
             currentShape.MoveShape();
             currentShape.RotateShape();
+
+            bool result = OnCollision();
+
+            Console.WriteLine("Collision: " + result);
         }
 
         Invalidate();
@@ -77,6 +82,37 @@ public class GameForm : Form
             g.DrawRectangle(Pens.Black, drawX, drawY, blockSize, blockSize);
         }
     }
+
+    private bool CheckCollisionGround()
+    {
+        foreach (var (dx, dy) in currentShape.ShapeStructure)
+        {
+            int blockY = currentShape.Y + dy;
+
+            if (blockY >= 19)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool OnCollision()
+    {
+        if (CheckCollisionGround())
+        {
+            Shape fallenShape = currentShape;
+            fallenShapes.Add(fallenShape);
+
+            SpawnNewShape();
+
+            return true;
+        }
+        return false;
+        Console.WriteLine("This checks collision");
+    }
+
     protected override void OnPaint(PaintEventArgs e)
     {
         base.OnPaint(e);
@@ -84,14 +120,14 @@ public class GameForm : Form
         Graphics g = e.Graphics;
         using Pen gridPen = new Pen(Color.Gray, 1);
 
-        // Vertikale Linien
+        // Col lines
         for (int x = 0; x <= cols; x++)
         {
             int xPos = offsetX + x * blockSize;
             g.DrawLine(gridPen, xPos, offsetY, xPos, offsetY + rows * blockSize);
         }
 
-        // Horizontale Linien
+        // Row lines
         for (int y = 0; y <= rows; y++)
         {
             int yPos = offsetY + y * blockSize;
@@ -101,6 +137,11 @@ public class GameForm : Form
         if (currentShape != null)
         {
             DrawShape(g, currentShape);
+        }
+
+        foreach (Shape shape in fallenShapes)
+        {
+            DrawShape(g, shape);
         }
     }
 
