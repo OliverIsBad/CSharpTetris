@@ -24,6 +24,9 @@ public class GameForm : Form
 
         this.DoubleBuffered = true;
 
+        this.KeyPreview = true;
+        this.KeyDown += GameForm_KeyDown;
+
         Button testButton = new Button
         {
             Text = "Reset",
@@ -35,6 +38,7 @@ public class GameForm : Form
         this.Controls.Add(testButton);
 
         gameTimer = new Timer();
+        //gameTimer.Interval = 500;
         gameTimer.Interval = 500;
         gameTimer.Tick += GameLoop;
         gameTimer.Start();
@@ -46,7 +50,7 @@ public class GameForm : Form
         if (currentShape != null)
         {
             currentShape.MoveShape();
-            currentShape.RotateShape();
+            //currentShape.RotateShape();
 
             bool result = OnCollision();
 
@@ -98,9 +102,65 @@ public class GameForm : Form
         return false;
     }
 
+    private bool CheckCollision()
+    {
+        foreach ((int dx, int dy) in currentShape.ShapeStructure)
+        {
+            int absX = currentShape.X + dx;
+            int absY = currentShape.Y + dy;
+
+            foreach (Shape shape in fallenShapes)
+            {
+                foreach ((int sx, int sy) in shape.ShapeStructure)
+                {
+                    int absSX = shape.X + sx;
+                    int absSY = shape.Y + sy;
+
+                    if (absX == absSX && absY == absSY)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private bool WouldCollide()
+    {
+        foreach ((int dx, int dy) in currentShape.ShapeStructure)
+        {
+            int absX = currentShape.X + dx;
+            int absY = currentShape.Y + dy + 1; // ← wir simulieren den nächsten Schritt
+
+            // Kollision mit Boden
+            if (absY >= rows)
+            {
+                return true;
+            }
+
+            foreach (Shape shape in fallenShapes)
+            {
+                foreach ((int sx, int sy) in shape.ShapeStructure)
+                {
+                    int absSX = shape.X + sx;
+                    int absSY = shape.Y + sy;
+
+                    if (absX == absSX && absY == absSY)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     private bool OnCollision()
     {
-        if (CheckCollisionGround())
+        if (CheckCollisionGround() || WouldCollide())
         {
             Shape fallenShape = currentShape;
             fallenShapes.Add(fallenShape);
@@ -110,7 +170,6 @@ public class GameForm : Form
             return true;
         }
         return false;
-        Console.WriteLine("This checks collision");
     }
 
     protected override void OnPaint(PaintEventArgs e)
@@ -147,7 +206,7 @@ public class GameForm : Form
 
     private void SpawnNewShape()
     {
-        int startPoint = 0;
+        int startPoint = 1;
 
         if (currentShape != null && currentShape.ShapeStructure.Count > 3)
         {
@@ -155,7 +214,7 @@ public class GameForm : Form
         }
 
         Random rnd = new Random();
-        int x = rnd.Next(0, startPoint);
+        int x = rnd.Next(1, startPoint);
 
         currentShape = ShapeFactory.GenerateRandomShape(x, 0);
         Invalidate();
@@ -166,4 +225,21 @@ public class GameForm : Form
         SpawnNewShape();
     }
 
+    private void GameForm_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (currentShape == null) return;
+
+        int oldX = currentShape.X;
+        int oldY = currentShape.Y;
+
+        GameControl.HandleInput(e.KeyCode, currentShape);
+
+        if (currentShape.IsOutOfBounds(cols))
+        {
+            currentShape.X = oldX;
+            currentShape.Y = oldY;
+        }
+
+        Invalidate();
+    }
 }

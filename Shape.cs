@@ -65,6 +65,20 @@ public class Shape
         }
     }
 
+    public bool IsOutOfBounds(int bounds)
+    {
+        foreach (var (x, _) in ShapeStructure)
+        {
+            int absX = X + x;
+
+            if (absX < 0 || absX >= bounds)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void RotateShape()
     {
         // New List with rotated Coordinates
