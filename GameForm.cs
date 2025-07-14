@@ -6,6 +6,8 @@ using System.Windows.Forms;
 public class GameForm : Form
 {
     private Button button;
+    private Label scoreLabel;
+
     private const int blockSize = 20;
     private const int rows = 20;
     private const int cols = 10;
@@ -19,6 +21,8 @@ public class GameForm : Form
 
     private bool gameover = false;
 
+    private int score = 0;
+
     public GameForm()
     {
         this.Text = "Tetris";
@@ -29,6 +33,11 @@ public class GameForm : Form
         this.KeyPreview = true;
         this.KeyDown += GameForm_KeyDown;
 
+        scoreLabel = new Label();
+        scoreLabel.Text = "Score: 0";
+        scoreLabel.Location = new Point(10, 10);
+        scoreLabel.AutoSize = true;
+
         Button testButton = new Button
         {
             Text = "Reset",
@@ -37,11 +46,13 @@ public class GameForm : Form
         };
 
         testButton.Click += TestButton_Click;
+
         this.Controls.Add(testButton);
+        this.Controls.Add(scoreLabel);
 
         gameTimer = new Timer();
         //gameTimer.Interval = 500;
-        
+
         gameTimer.Interval = 500;
         gameTimer.Tick += GameLoop;
         gameTimer.Start();
@@ -172,7 +183,7 @@ public class GameForm : Form
             Shape fallenShape = currentShape;
             fallenShapes.Add(fallenShape);
 
-            GameLogic.LineClear(fallenShapes, cols);
+            GameLogic.LineClear(fallenShapes, cols, scoreLabel, ref score);
 
             SpawnNewShape();
 

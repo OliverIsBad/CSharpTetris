@@ -7,7 +7,7 @@ namespace CSharpTetris;
 
 public static class GameLogic
 {
-    public static void LineClear(List<Shape> shapes, int cols)
+    public static void LineClear(List<Shape> shapes, int cols, Label label, ref int score)
     {
         // Collect all global block positions
         var allBlocks = new List<(int x, int y, Shape owner)>();
@@ -35,7 +35,7 @@ public static class GameLogic
             .ToList();
 
         if (fullRows.Count == 0)
-            return;
+            return ;
 
         // Remove blocks that are in the full rows
         foreach (var shape in shapes)
@@ -71,6 +71,8 @@ public static class GameLogic
         shapes.RemoveAll(s => s.ShapeStructure.Count == 0);
 
         Soundmanager.PlayLineClear();
+        score++;
+        label.Text = "Score: " + score;
     }
  
     private static void DropBlocks(List<Shape> shapes, List<int> fullRows)
