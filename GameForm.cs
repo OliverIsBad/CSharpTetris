@@ -23,8 +23,6 @@ public class GameForm : Form
 
     private int score = 0;
 
-    private GameData gameData;
-
     public GameForm()
     {
         this.Text = "Tetris";
@@ -68,7 +66,8 @@ public class GameForm : Form
             currentShape.MoveShape();
 
             bool result = OnCollision();
-            gameData.Score = score;
+            GameData.Instance.Score = score;
+            SaveManager.Save();
         }
         if (GameLogic.HasGameEnded(fallenShapes))
         {
@@ -193,7 +192,8 @@ public class GameForm : Form
             Shape fallenShape = currentShape;
 
             fallenShapes.Add(fallenShape);
-            gameData.fallenShapes.Add(fallenShape);
+            GameData.Instance.fallenShapes.Add(fallenShape);
+            SaveManager.Save();
 
             GameLogic.LineClear(fallenShapes, cols, scoreLabel, ref score);
 

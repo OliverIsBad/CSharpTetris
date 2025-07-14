@@ -30,7 +30,10 @@ public class GameData
     public int Score { get; set; }
     public List<Shape> fallenShapes { get; set; }
 
-    private GameData() { }
+    private GameData()
+    {
+        fallenShapes = new List<Shape>();
+    }
 
     public static void Load(GameData data)
     {
