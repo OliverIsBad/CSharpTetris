@@ -67,7 +67,7 @@ public static class GameLogic
         shapes.RemoveAll(s => s.ShapeStructure.Count == 0);
     }
 
-    public static void DropBlocks(List<Shape> shapes, List<int> fullRows)
+    private static void DropBlocks(List<Shape> shapes, List<int> fullRows)
     {
         if (fullRows.Count == 0) return;
 
@@ -90,4 +90,5 @@ public static class GameLogic
             shape.ShapeStructure = newStructure;
         }
     }
+
 }

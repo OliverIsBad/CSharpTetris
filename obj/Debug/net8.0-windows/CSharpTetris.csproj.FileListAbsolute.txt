@@ -28,3 +28,13 @@ C:\Users\olive\Documents\projects\CSharpTetris\obj\Debug\net8.0-windows\refint\C
 C:\Users\olive\Documents\projects\CSharpTetris\obj\Debug\net8.0-windows\CSharpTetris.pdb
 C:\Users\olive\Documents\projects\CSharpTetris\obj\Debug\net8.0-windows\CSharpTetris.genruntimeconfig.cache
 C:\Users\olive\Documents\projects\CSharpTetris\obj\Debug\net8.0-windows\ref\CSharpTetris.dll
+d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\NAudio.dll
+d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\NAudio.Asio.dll
+d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\NAudio.Core.dll
+d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\NAudio.Midi.dll
+d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\NAudio.Wasapi.dll
+d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\NAudio.WinForms.dll
+d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\NAudio.WinMM.dll
+d:\EigeneProjekte\CSharpTetris\obj\Debug\net8.0-windows\CSharpTetris.csproj.AssemblyReference.cache
+D:\EigeneProjekte\CSharpTetris\obj\Debug\net8.0-windows\CSharpTe.B7C8CEBA.Up2Date
+d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\assets\sounds\game-start.mp3

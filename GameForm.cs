@@ -224,6 +224,7 @@ public class GameForm : Form
 
     private void TestButton_Click(object sender, EventArgs e)
     {
+        Soundmanager.PlayGameStart();
         SpawnNewShape();
     }
 
