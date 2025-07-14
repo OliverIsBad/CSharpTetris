@@ -22,8 +22,7 @@ It is designed to demonstrate basic game mechanics such as shape movement, rotat
 |-----------|--------------------|
 | ← / →     | Move left/right    |
 | ↓         | Soft drop          |
-| Space     | (Optional) Hard drop or rotate |
-| R         | Reset / new shape  |
+| ↑    | rotate |
 
 ---
 
