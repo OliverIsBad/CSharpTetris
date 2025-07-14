@@ -7,7 +7,6 @@ namespace CSharpTetris;
 
 public static class Soundmanager
 {
-    // Liste zur Lebensverlängerung, verhindert sofortiges Dispose
     private static readonly List<(WaveOutEvent output, AudioFileReader reader)> activeSounds = new();
 
     public static void PlaySound(string path)
@@ -23,7 +22,6 @@ public static class Soundmanager
         outputDevice.Init(audioFile);
         outputDevice.Play();
 
-        // Sobald Playback vorbei ist: Ressourcen freigeben
         outputDevice.PlaybackStopped += (s, e) =>
         {
             outputDevice.Dispose();
@@ -31,7 +29,6 @@ public static class Soundmanager
             activeSounds.RemoveAll(entry => entry.output == outputDevice);
         };
 
-        // Hält Instanzen am Leben
         activeSounds.Add((outputDevice, audioFile));
     }
 
@@ -46,6 +43,13 @@ public static class Soundmanager
     {
         string baseDir = AppDomain.CurrentDomain.BaseDirectory;
         string soundPath = Path.Combine(baseDir, "assets", "sounds", "block-move.wav");
+        PlaySound(soundPath);
+    }
+
+    public static void PlayLineClear()
+    {
+        string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+        string soundPath = Path.Combine(baseDir, "assets", "sounds", "line-clear.wav");
         PlaySound(soundPath);
     }
 }

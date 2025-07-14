@@ -9,7 +9,7 @@ public static class GameLogic
 {
     public static void LineClear(List<Shape> shapes, int cols)
     {
-        // Alle globalen Blockpositionen erfassen
+        // Collect all global block positions
         var allBlocks = new List<(int x, int y, Shape owner)>();
 
         foreach (var shape in shapes)
@@ -22,11 +22,12 @@ public static class GameLogic
             }
         }
 
-        // Zeilen zählen
+        // Count blocks per row
         var rowCounts = allBlocks
             .GroupBy(b => b.y)
             .ToDictionary(g => g.Key, g => g.Count());
 
+        // Identify full rows
         var fullRows = rowCounts
             .Where(kv => kv.Value >= cols)
             .Select(kv => kv.Key)
@@ -36,7 +37,7 @@ public static class GameLogic
         if (fullRows.Count == 0)
             return;
 
-        // Entferne Blöcke in den vollen Reihen
+        // Remove blocks that are in the full rows
         foreach (var shape in shapes)
         {
             shape.ShapeStructure = shape.ShapeStructure
@@ -48,7 +49,7 @@ public static class GameLogic
                 .ToList();
         }
 
-        // Schiebe Blöcke oberhalb nach unten
+        // Move down blocks above the cleared rows
         foreach (var shape in shapes)
         {
             var newStruct = new List<(int x, int y)>();
@@ -63,11 +64,15 @@ public static class GameLogic
             shape.ShapeStructure = newStruct;
         }
 
+        // Final adjustment (if needed)
         DropBlocks(shapes, fullRows);
 
+        // Remove any shapes that have no blocks left
         shapes.RemoveAll(s => s.ShapeStructure.Count == 0);
-    }
 
+        Soundmanager.PlayLineClear();
+    }
+ 
     private static void DropBlocks(List<Shape> shapes, List<int> fullRows)
     {
         if (fullRows.Count == 0) return;
@@ -82,7 +87,7 @@ public static class GameLogic
             {
                 int absY = shape.Y + y;
 
-                // Wie viele gelöschte Reihen liegen unterhalb dieses Blocks?
+                // deleted lines under the block
                 int shift = fullRows.Count(row => row > absY);
 
                 newStructure.Add((x, y + shift));
