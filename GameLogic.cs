@@ -89,7 +89,7 @@ public static class GameLogic
             {
                 int absY = shape.Y + y;
 
-                // deleted lines under the block
+                // delete lines under the block
                 int shift = fullRows.Count(row => row > absY);
 
                 newStructure.Add((x, y + shift));

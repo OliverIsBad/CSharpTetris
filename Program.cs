@@ -7,7 +7,7 @@ static class Program
     {
         ApplicationConfiguration.Initialize();
         //Application.Run(new GameForm());
-        Application.Run(new GameOverForm());
+    Application.Run(new GameForm());
         Console.WriteLine("This is tetris");
     }    
 }

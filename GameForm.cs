@@ -23,6 +23,8 @@ public class GameForm : Form
 
     private int score = 0;
 
+    private GameData gameData;
+
     public GameForm()
     {
         this.Text = "Tetris";
@@ -56,6 +58,7 @@ public class GameForm : Form
         gameTimer.Interval = 500;
         gameTimer.Tick += GameLoop;
         gameTimer.Start();
+
     }
 
     private void GameLoop(object sender, EventArgs e)
@@ -63,20 +66,28 @@ public class GameForm : Form
         if (currentShape != null && !gameover)
         {
             currentShape.MoveShape();
-            //currentShape.RotateShape();
 
             bool result = OnCollision();
-
-            Console.WriteLine("Collision: " + result);
+            gameData.Score = score;
         }
         if (GameLogic.HasGameEnded(fallenShapes))
         {
             gameover = true;
             Console.WriteLine("Game Over");
+            gameTimer.Stop();
+            this.Hide();
+
+            using (GameOverForm gameOverForm = new GameOverForm())
+            {
+                gameOverForm.ShowDialog();
+            }
+
+            this.Close();
         }
 
         Invalidate();
     }
+
     private void DrawShape(Graphics g, Shape shape)
     {
         using SolidBrush brush = new SolidBrush(shape.ShapeColor);
@@ -150,9 +161,8 @@ public class GameForm : Form
         foreach ((int dx, int dy) in currentShape.ShapeStructure)
         {
             int absX = currentShape.X + dx;
-            int absY = currentShape.Y + dy + 1; // ← wir simulieren den nächsten Schritt
+            int absY = currentShape.Y + dy + 1;
 
-            // Kollision mit Boden
             if (absY >= rows)
             {
                 return true;
@@ -181,7 +191,9 @@ public class GameForm : Form
         if (CheckCollisionGround() || WouldCollide())
         {
             Shape fallenShape = currentShape;
+
             fallenShapes.Add(fallenShape);
+            gameData.fallenShapes.Add(fallenShape);
 
             GameLogic.LineClear(fallenShapes, cols, scoreLabel, ref score);
 
