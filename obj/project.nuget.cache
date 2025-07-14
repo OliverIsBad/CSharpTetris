@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PbRAMnO3gqgasBocx9rtZyBrHfL4lLj+66stxv+fW/I5+4Qpl9A1qslYGTnnC3XM6/429CMW1rylOcBpfEZ7Kw==",
+  "dgSpecHash": "UmBTR1XiKCbKpN9oOQmKBIkzUE9JluK69OarNyPH07GuaLUU5OVbwaWSijGBdh6MP9MEnJY8sxCHveYQY01iGw==",
   "success": true,
-  "projectFilePath": "d:\\EigeneProjekte\\CSharpTetris\\CSharpTetris.csproj",
+  "projectFilePath": "D:\\EigeneProjekte\\CSharpTetris\\CSharpTetris.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

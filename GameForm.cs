@@ -165,6 +165,8 @@ public class GameForm : Form
             Shape fallenShape = currentShape;
             fallenShapes.Add(fallenShape);
 
+            GameLogic.LineClear(fallenShapes, cols);
+
             SpawnNewShape();
 
             return true;
