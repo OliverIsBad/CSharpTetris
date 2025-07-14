@@ -38,3 +38,4 @@ d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\NAudio.WinMM.dll
 d:\EigeneProjekte\CSharpTetris\obj\Debug\net8.0-windows\CSharpTetris.csproj.AssemblyReference.cache
 D:\EigeneProjekte\CSharpTetris\obj\Debug\net8.0-windows\CSharpTe.B7C8CEBA.Up2Date
 d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\assets\sounds\game-start.mp3
+d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\assets\sounds\block-move.wav

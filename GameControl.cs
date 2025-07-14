@@ -7,6 +7,7 @@ public static class GameControl
 {
     public static void HandleInput(Keys key, Shape shape)
     {
+        Soundmanager.PlayBlockMove();
         switch (key)
         {
             case Keys.A:

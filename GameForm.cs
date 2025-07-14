@@ -17,6 +17,8 @@ public class GameForm : Form
     private List<Shape> fallenShapes = new List<Shape>();
     private Shape currentShape;
 
+    private bool gameover = false;
+
     public GameForm()
     {
         this.Text = "Tetris";
@@ -39,15 +41,15 @@ public class GameForm : Form
 
         gameTimer = new Timer();
         //gameTimer.Interval = 500;
+        
         gameTimer.Interval = 500;
         gameTimer.Tick += GameLoop;
         gameTimer.Start();
-
     }
 
     private void GameLoop(object sender, EventArgs e)
     {
-        if (currentShape != null)
+        if (currentShape != null && !gameover)
         {
             currentShape.MoveShape();
             //currentShape.RotateShape();
@@ -55,6 +57,11 @@ public class GameForm : Form
             bool result = OnCollision();
 
             Console.WriteLine("Collision: " + result);
+        }
+        if (GameLogic.HasGameEnded(fallenShapes))
+        {
+            gameover = true;
+            Console.WriteLine("Game Over");
         }
 
         Invalidate();

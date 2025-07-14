@@ -41,4 +41,11 @@ public static class Soundmanager
         string soundPath = Path.Combine(baseDir, "assets", "sounds", "game-start.mp3");
         PlaySound(soundPath);
     }
+
+    public static void PlayBlockMove()
+    {
+        string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+        string soundPath = Path.Combine(baseDir, "assets", "sounds", "block-move.wav");
+        PlaySound(soundPath);
+    }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace CSharpTetris;
@@ -89,6 +90,23 @@ public static class GameLogic
 
             shape.ShapeStructure = newStructure;
         }
+    }
+
+    public static bool HasGameEnded(List<Shape> fallenShapes)
+    {
+        foreach (var shape in fallenShapes)
+        {
+            foreach (var (x, y) in shape.ShapeStructure)
+            {
+                int blockY = shape.Y + y;
+
+                if (blockY <= 1)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }
