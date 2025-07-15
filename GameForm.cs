@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 public class GameForm : Form
 {
-    private Button button;
+    private Button testButton;
     private Label scoreLabel;
 
     private const int blockSize = 20;
@@ -38,7 +38,7 @@ public class GameForm : Form
         scoreLabel.Location = new Point(10, 10);
         scoreLabel.AutoSize = true;
 
-        Button testButton = new Button
+        testButton = new Button
         {
             Text = "Reset",
             Size = new Size(80, 30),
@@ -51,7 +51,6 @@ public class GameForm : Form
         this.Controls.Add(scoreLabel);
 
         gameTimer = new Timer();
-        //gameTimer.Interval = 500;
 
         gameTimer.Interval = 500;
         gameTimer.Tick += GameLoop;
@@ -271,6 +270,17 @@ public class GameForm : Form
         {
             currentShape.X = oldX;
             currentShape.Y = oldY;
+        }
+
+        if (CheckCollisionGround() || CheckCollision())
+        {
+            currentShape.X = oldX;
+            currentShape.Y = oldY;
+
+            if (e.KeyCode == Keys.S)
+            {
+                OnCollision();
+            }
         }
 
         Invalidate();
