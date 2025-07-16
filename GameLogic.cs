@@ -7,6 +7,77 @@ namespace CSharpTetris;
 
 public static class GameLogic
 {
+    
+    public static bool CheckCollisionGround(Shape currentShape)
+    {
+        foreach (var (dx, dy) in currentShape.ShapeStructure)
+        {
+            int blockY = currentShape.Y + dy;
+
+            if (blockY >= 19)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    public static bool CheckCollision(Shape currentShape, List<Shape> fallenShapes)
+    {
+        foreach ((int dx, int dy) in currentShape.ShapeStructure)
+        {
+            int absX = currentShape.X + dx;
+            int absY = currentShape.Y + dy;
+
+            foreach (Shape shape in fallenShapes)
+            {
+                foreach ((int sx, int sy) in shape.ShapeStructure)
+                {
+                    int absSX = shape.X + sx;
+                    int absSY = shape.Y + sy;
+
+                    if (absX == absSX && absY == absSY)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static bool WouldCollide(Shape currentShape, List<Shape> fallenShapes, int rows)
+    {
+        foreach ((int dx, int dy) in currentShape.ShapeStructure)
+        {
+            int absX = currentShape.X + dx;
+            int absY = currentShape.Y + dy + 1;
+
+            if (absY >= rows)
+            {
+                return true;
+            }
+
+            foreach (Shape shape in fallenShapes)
+            {
+                foreach ((int sx, int sy) in shape.ShapeStructure)
+                {
+                    int absSX = shape.X + sx;
+                    int absSY = shape.Y + sy;
+
+                    if (absX == absSX && absY == absSY)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     public static void LineClear(List<Shape> shapes, int cols, Label label, ref int score)
     {
         // Collect all global block positions
@@ -35,7 +106,7 @@ public static class GameLogic
             .ToList();
 
         if (fullRows.Count == 0)
-            return ;
+            return;
 
         // Remove blocks that are in the full rows
         foreach (var shape in shapes)

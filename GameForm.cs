@@ -114,79 +114,9 @@ public class GameForm : Form
         }
     }
 
-    private bool CheckCollisionGround()
-    {
-        foreach (var (dx, dy) in currentShape.ShapeStructure)
-        {
-            int blockY = currentShape.Y + dy;
-
-            if (blockY >= 19)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private bool CheckCollision()
-    {
-        foreach ((int dx, int dy) in currentShape.ShapeStructure)
-        {
-            int absX = currentShape.X + dx;
-            int absY = currentShape.Y + dy;
-
-            foreach (Shape shape in fallenShapes)
-            {
-                foreach ((int sx, int sy) in shape.ShapeStructure)
-                {
-                    int absSX = shape.X + sx;
-                    int absSY = shape.Y + sy;
-
-                    if (absX == absSX && absY == absSY)
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
-    }
-
-    private bool WouldCollide()
-    {
-        foreach ((int dx, int dy) in currentShape.ShapeStructure)
-        {
-            int absX = currentShape.X + dx;
-            int absY = currentShape.Y + dy + 1;
-
-            if (absY >= rows)
-            {
-                return true;
-            }
-
-            foreach (Shape shape in fallenShapes)
-            {
-                foreach ((int sx, int sy) in shape.ShapeStructure)
-                {
-                    int absSX = shape.X + sx;
-                    int absSY = shape.Y + sy;
-
-                    if (absX == absSX && absY == absSY)
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
-    }
-
     private bool OnCollision()
     {
-        if (CheckCollisionGround() || WouldCollide())
+        if (GameLogic.CheckCollisionGround(currentShape) || GameLogic.WouldCollide(currentShape, fallenShapes, rows))
         {
             Shape fallenShape = currentShape;
 
@@ -272,7 +202,7 @@ public class GameForm : Form
             currentShape.Y = oldY;
         }
 
-        if (CheckCollisionGround() || CheckCollision())
+        if (GameLogic.CheckCollisionGround(currentShape) || GameLogic.CheckCollision(currentShape, fallenShapes))
         {
             currentShape.X = oldX;
             currentShape.Y = oldY;
