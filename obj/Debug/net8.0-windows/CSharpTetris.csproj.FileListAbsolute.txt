@@ -41,3 +41,4 @@ d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\assets\sounds\game-start
 d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\assets\sounds\block-move.wav
 d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\assets\sounds\line-clear.wav
 d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\assets\sounds\game-over.mp3
+d:\EigeneProjekte\CSharpTetris\bin\Debug\net8.0-windows\assets\sounds\fallen-block.wav

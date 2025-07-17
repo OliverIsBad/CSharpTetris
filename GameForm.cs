@@ -27,6 +27,7 @@ public class GameForm : Form
     {
         this.Text = "Tetris";
         this.Size = new System.Drawing.Size(335, 520);
+        this.BackColor = System.Drawing.Color.FromArgb(36, 32, 35);
 
         this.DoubleBuffered = true;
 
@@ -35,12 +36,14 @@ public class GameForm : Form
 
         scoreLabel = new Label();
         scoreLabel.Text = "Score: 0";
+        scoreLabel.ForeColor = System.Drawing.Color.White;
         scoreLabel.Location = new Point(10, 10);
         scoreLabel.AutoSize = true;
 
         testButton = new Button
         {
             Text = "Reset",
+            ForeColor = System.Drawing.Color.White,
             Size = new Size(80, 30),
             Location = new Point(100, 10)
         };
@@ -119,7 +122,7 @@ public class GameForm : Form
         if (GameLogic.CheckCollisionGround(currentShape) || GameLogic.WouldCollide(currentShape, fallenShapes, rows))
         {
             Shape fallenShape = currentShape;
-
+            Soundmanager.PlayFallenShape();
             fallenShapes.Add(fallenShape);
             GameData.Instance.fallenShapes.Add(fallenShape);
             SaveManager.Save();
