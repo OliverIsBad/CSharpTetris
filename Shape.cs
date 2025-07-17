@@ -102,6 +102,7 @@ public class Shape
 
         ShapeStructure = rotated;
         Rotation = (Rotation + 90) % 360;
+
     }
 
     public void MoveShape()

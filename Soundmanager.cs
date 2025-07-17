@@ -52,4 +52,16 @@ public static class Soundmanager
         string soundPath = Path.Combine(baseDir, "assets", "sounds", "line-clear.wav");
         PlaySound(soundPath);
     }
+
+    public static void PlayGameOver()
+    {
+        string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+        string soundPath = Path.Combine(baseDir, "assets", "sounds", "game-over.mp3");
+    }
+
+    public static void PlayFallenShape()
+    {
+        string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+        string soundPath = Path.Combine(baseDir, "assets", "sounds", "fallen-block.wav");
+    }
 }
